@@ -53,9 +53,14 @@ end
 
 ---Switch pane in tmux
 ---@param direction Direction See |navigator.api.Direction|
+---@param command? string Optional command to run after navigation
 ---@return Tmux
-function Tmux:navigate(direction)
-    self.execute(string.format("select-pane -t '%s' -%s", self.pane, self.direction[direction]))
+function Tmux:navigate(direction, command)
+    local cmd = string.format("select-pane -t '%s' -%s", self.pane, self.direction[direction])
+    if command then
+        cmd = cmd .. ' ; ' .. command
+    end
+    self.execute(cmd)
     return self
 end
 

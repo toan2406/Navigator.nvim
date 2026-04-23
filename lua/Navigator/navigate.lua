@@ -68,7 +68,8 @@ end
 
 ---For smoothly navigating through neovim splits and mux panes
 ---@param direction string
-function N.navigate(direction)
+---@param command? string Optional command to run after mux navigation
+function N.navigate(direction, command)
     -- window id before navigation
     local cur_win = A.nvim_get_current_win()
 
@@ -84,7 +85,7 @@ function N.navigate(direction)
     -- there is mux pane besided the edge
     -- So we can navigate to the mux pane
     if back_to_mux(at_edge) then
-        N.config.mux:navigate(direction)
+        N.config.mux:navigate(direction, command)
 
         local save = N.config.auto_save
         if save == 'current' then
