@@ -58,7 +58,7 @@ end
 function Tmux:navigate(direction, command)
     local cmd = string.format("select-pane -t '%s' -%s", self.pane, self.direction[direction])
     if command then
-        cmd = cmd .. ' ; ' .. command
+        cmd = cmd .. ' \\; ' .. command
     end
     self.execute(cmd)
     return self
